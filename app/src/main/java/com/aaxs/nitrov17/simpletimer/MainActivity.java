@@ -1,10 +1,12 @@
 package com.aaxs.nitrov17.simpletimer;
 
+import android.content.Context;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     Button button;
     CountDownTimer countDownTimer;
+    Vibrator vibrator;
     int x;
     boolean isTimerActive=false;
 
@@ -103,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 textView.setText("Times Up!");
                 isTimerActive=false;
                 seekBarEnabler();
-                playNotif();
+                userAlert();
 
             }
         };
@@ -138,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         textView.setText("0:00");
     }
 
-    void playNotif()
+    void userAlert()
     {
         try {
             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -147,5 +150,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        vibrator=(Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(1000);
     }
 }
