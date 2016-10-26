@@ -77,7 +77,10 @@ public class MainActivity extends AppCompatActivity {
 
     void setPreTimerText(long a)
     {
-        textView.setText(String.valueOf(a));
+        int totalSecs =(int)a;
+        int minutes = (totalSecs % 3600) / 60;
+        int seconds = totalSecs % 60;
+        textView.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
     }
 
     void updateText(long a)
@@ -133,5 +136,6 @@ public class MainActivity extends AppCompatActivity {
         seekBarEnabler();
         seekBar.setProgress(0);
     }
+    
 
 }
