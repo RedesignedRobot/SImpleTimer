@@ -3,6 +3,7 @@ package com.aaxs.nitrov17.simpletimer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -81,8 +82,10 @@ public class MainActivity extends AppCompatActivity {
 
     void updateText(long a)
     {
-        int val = (int)a/1000;
-        textView.setText(String.valueOf(val));
+        int totalSecs =(int)a/1000;
+        int minutes = (totalSecs % 3600) / 60;
+        int seconds = totalSecs % 60;
+        textView.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
     }
 
     void primeTimer(int a)
@@ -130,9 +133,5 @@ public class MainActivity extends AppCompatActivity {
         seekBarEnabler();
         seekBar.setProgress(0);
     }
-
-
-
-
 
 }
