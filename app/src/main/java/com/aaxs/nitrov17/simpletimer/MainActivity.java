@@ -32,8 +32,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
-                x=i;
-                setPreTimerText((long)x);
+                x=i*1000;
+                updateText((long)x);
+                if(i==0)
+                    correctText();
 
             }
 
@@ -71,16 +73,8 @@ public class MainActivity extends AppCompatActivity {
     {
         seekBar.setMax(600);    //In Seconds
         seekBar.setProgress(0);
-        textView.setText("0");
+        textView.setText("00:00");
         button.setText("Start");
-    }
-
-    void setPreTimerText(long a)
-    {
-        int totalSecs =(int)a;
-        int minutes = (totalSecs % 3600) / 60;
-        int seconds = totalSecs % 60;
-        textView.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
     }
 
     void updateText(long a)
@@ -93,8 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
     void primeTimer(int a)
     {
-        int val=a*1000;
-        countDownTimer= new CountDownTimer(val,1000) {
+        countDownTimer= new CountDownTimer(a,1000) {
             @Override
             public void onTick(long l) {
 
@@ -136,6 +129,9 @@ public class MainActivity extends AppCompatActivity {
         seekBarEnabler();
         seekBar.setProgress(0);
     }
-    
 
+    void correctText()
+    {
+        textView.setText("0:00");
+    }
 }
