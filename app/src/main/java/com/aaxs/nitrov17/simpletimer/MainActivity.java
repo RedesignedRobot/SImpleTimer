@@ -1,9 +1,11 @@
 package com.aaxs.nitrov17.simpletimer;
 
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     {
         seekBar.setMax(600);    //In Seconds
         seekBar.setProgress(0);
-        textView.setText("00:00");
+        textView.setText("0:00");
         button.setText("Start");
     }
 
@@ -101,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 textView.setText("Times Up!");
                 isTimerActive=false;
                 seekBarEnabler();
+                playNotif();
 
             }
         };
@@ -133,5 +136,16 @@ public class MainActivity extends AppCompatActivity {
     void correctText()
     {
         textView.setText("0:00");
+    }
+
+    void playNotif()
+    {
+        try {
+            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
